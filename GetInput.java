@@ -51,9 +51,10 @@ public class GetInput {
      */
     public String pickBetween(String optionA, String inputA, String optionB, String inputB) {
         String ans = "";
-        while(!ans.equals(inputA) || !ans.equals(inputB)) {
+        while(!ans.equals(inputA) && !ans.equals(inputB)) {
             System.out.println("Please enter '" + inputA + "' for " + optionA + " or '" + inputB + "' for " + optionB + ".");
-            if(!ans.equals(inputA) || !ans.equals(inputB)) {
+            ans = sc.next();
+            if(!ans.equals(inputA) && !ans.equals(inputB)) {
                 System.out.println("That's not one of the choices!");
             }
         }
