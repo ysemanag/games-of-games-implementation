@@ -14,8 +14,13 @@ public class GetInput {
         int ans = min - 1;
         while(ans < min || ans > max) {
             System.out.println("Please enter an integer between " + min + " and " + max + ".");
-            ans = sc.nextInt();
-            if(ans < min || ans > max) {
+            String input = sc.next();
+            try {
+                ans = Integer.parseInt(input);
+                if(ans < min || ans > max) {
+                    System.out.println("That is out of range!");
+                }
+            } catch (NumberFormatException nfe) {
                 System.out.println("That is out of range!");
             }
         }
@@ -30,10 +35,15 @@ public class GetInput {
     public int getBestOf() {
         int ans = -1;
         while(ans < 0 || ans % 2 == 0) {
-            System.out.println("Please enter a positive odd integer.");
-            ans = sc.nextInt();
-            if(ans < 0 || ans % 2 == 0) {
-                System.out.println("That is not a positive odd integer!");
+            System.out.println("Please enter positive odd number to pick the best out of the number of games: ");
+            String input = sc.next();
+            try {
+                ans = Integer.parseInt(input);
+                if(ans < 0 || ans % 2 == 0) {
+                    System.out.println("Wrong input, please pick a positive odd number");
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println("Wrong input, please pick a positive odd number");
             }
         }
         return ans;
