@@ -4,14 +4,9 @@ public class GetInput {
     Scanner sc = new Scanner(System.in);
     private String inputRangeText = "Please enter an integer between %d and %d.\n";
     private String pickBetweenText = "Please enter '%s' for %s or '%s' for %s.\n";
-    private String roundPickText = "Enter number of rounds.";
+    private String roundPickText = "Enter number of guesses: ";
     private String badInputText = "That is out of range!";
-
-
-    public GetInput() {
-
-    }
-
+    
     /**
      * Change the text displayed when asking for an input range.
      *
@@ -24,14 +19,7 @@ public class GetInput {
      *
      * @param s - The new text
      */
-    public void setPickBetweenText(String s) { pickBetweenText = s; }
-
-    /**
-     * Change the text displayed when asking or the number of rounds to be played.
-     *
-     * @param s - The new text
-     */
-    public void setRoundPickText(String s) { roundPickText = s; }
+    public void setPickBetweentext(String s) { pickBetweenText = s; }
 
     /**
      * Change the text displayed when an invalid input is entered.
@@ -50,12 +38,11 @@ public class GetInput {
     public int getIntInRange(int min, int max) {
         int ans = min - 1;
         while(ans < min || ans > max) {
-            if((inputRangeText.replace("%", " ")).equals(inputRangeText)) { // there are no % signs
+	    if((inputRangeText.replace("%", " ")).equals(inputRangeText)) { // there are no % signs
                 System.out.print(inputRangeText);
             } else {
                 System.out.printf(inputRangeText, min, max); // there are % signs
             }
-
             String input = sc.next();
             try {
                 ans = Integer.parseInt(input);
@@ -69,27 +56,28 @@ public class GetInput {
         return ans;
     }
 
-    /**
+     /**
      * Ask the user to pick a positive integer.
      *
      * @return The user's inputed number
      */
-    public int getPositiveInt() {
+    public int getPositiveInt(String prompt) {
         int ans = -1;
         while(ans <= 0) {
-            System.out.println("Please enter a range from 0 through: ");
+            System.out.print(prompt);
             String input = sc.next();
             try {
                 ans = Integer.parseInt(input);
                 if(ans <= 0) {
-                    System.out.println(badInputText);
+                    System.out.println("Wrong input, please pick a positive number");
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println(badInputText);
+                System.out.println("Wrong input, please pick a positive number");
             }
         }
         return ans;
     }
+
 
     /**
      * Ask the user to pick a "best of" integer, which will be positive and odd.
@@ -99,15 +87,15 @@ public class GetInput {
     public int getBestOf() {
         int ans = -1;
         while(ans < 0 || ans % 2 == 0) {
-            System.out.println("Please enter positive odd number to pick the best out of the number of games: ");
+            System.out.print("Please enter positive odd number to pick the best out of the number of games: ");
             String input = sc.next();
             try {
                 ans = Integer.parseInt(input);
                 if(ans < 0 || ans % 2 == 0) {
-                    System.out.println(badInputText);
+                    System.out.println("Wrong input, please pick a positive odd number");
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println(badInputText);
+                System.out.println("Wrong input, please pick a positive odd number");
             }
         }
         return ans;
@@ -126,13 +114,7 @@ public class GetInput {
     public String pickBetween(String optionA, String inputA, String optionB, String inputB) {
         String ans = "";
         while(!ans.equals(inputA) && !ans.equals(inputB)) {
-            // System.out.println("Please enter '" + inputA + "' for " + optionA + " or '" + inputB + "' for " + optionB + ".");
-            if((pickBetweenText.replace("%", " ")).equals(pickBetweenText)) { // there are no % signs
-                System.out.print(pickBetweenText);
-            } else {
-                System.out.printf(pickBetweenText, inputA, optionA, inputB, optionB); // there are % signs
-            }
-
+            System.out.print("Enter '" + inputA + "' for " + optionA + " or '" + inputB + "' for " + optionB + ": ");
             ans = sc.next();
             if(!ans.equals(inputA) && !ans.equals(inputB)) {
                 System.out.println("That's not one of the choices!");
