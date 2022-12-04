@@ -4,6 +4,7 @@ public class GetInput {
     Scanner sc = new Scanner(System.in);
     private String inputRangeText = "Please enter an integer between %d and %d.\n";
     private String pickBetweenText = "Please enter '%s' for %s or '%s' for %s.\n";
+    private String roundPickText = "Enter number of rounds.";
     private String badInputText = "That is out of range!";
 
 
@@ -23,7 +24,14 @@ public class GetInput {
      *
      * @param s - The new text
      */
-    public void setPickBetweentext(String s) { pickBetweenText = s; }
+    public void setPickBetweenText(String s) { pickBetweenText = s; }
+
+    /**
+     * Change the text displayed when asking or the number of rounds to be played.
+     *
+     * @param s - The new text
+     */
+    public void setRoundPickText(String s) { roundPickText = s; }
 
     /**
      * Change the text displayed when an invalid input is entered.
@@ -42,7 +50,12 @@ public class GetInput {
     public int getIntInRange(int min, int max) {
         int ans = min - 1;
         while(ans < min || ans > max) {
-            System.out.printf(inputRangeText, min, max);
+            if((inputRangeText.replace("%", " ")).equals(inputRangeText)) { // there are no % signs
+                System.out.print(inputRangeText);
+            } else {
+                System.out.printf(inputRangeText, min, max); // there are % signs
+            }
+
             String input = sc.next();
             try {
                 ans = Integer.parseInt(input);
@@ -114,7 +127,12 @@ public class GetInput {
         String ans = "";
         while(!ans.equals(inputA) && !ans.equals(inputB)) {
             // System.out.println("Please enter '" + inputA + "' for " + optionA + " or '" + inputB + "' for " + optionB + ".");
-            System.out.printf(pickBetweenText, inputA, optionA, inputB, optionB);
+            if((pickBetweenText.replace("%", " ")).equals(pickBetweenText)) { // there are no % signs
+                System.out.print(pickBetweenText);
+            } else {
+                System.out.printf(pickBetweenText, inputA, optionA, inputB, optionB); // there are % signs
+            }
+
             ans = sc.next();
             if(!ans.equals(inputA) && !ans.equals(inputB)) {
                 System.out.println("That's not one of the choices!");
