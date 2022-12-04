@@ -2,6 +2,35 @@ import java.util.*;
 
 public class GetInput {
     Scanner sc = new Scanner(System.in);
+    private String inputRangeText = "Please enter an integer between %d and %d.\n";
+    private String pickBetweenText = "Please enter '%s' for %s or '%s' for %s.\n";
+    private String badInputText = "That is out of range!";
+
+
+    public GetInput() {
+
+    }
+
+    /**
+     * Change the text displayed when asking for an input range.
+     *
+     * @param s - The new text
+     */
+    public void setInputRangeText(String s) { inputRangeText = s; }
+
+    /**
+     * Change the text displayed when asking to pick between two options.
+     *
+     * @param s - The new text
+     */
+    public void setPickBetweentext(String s) { pickBetweenText = s; }
+
+    /**
+     * Change the text displayed when an invalid input is entered.
+     *
+     * @param s - The new text
+     */
+    public void setBadInputText(String s) { badInputText = s; }
 
     /**
      * Ask the user to pick an integer between a range, inclusive.
@@ -13,15 +42,15 @@ public class GetInput {
     public int getIntInRange(int min, int max) {
         int ans = min - 1;
         while(ans < min || ans > max) {
-            System.out.println("Please enter an integer between " + min + " and " + max + ".");
+            System.out.printf(inputRangeText, min, max);
             String input = sc.next();
             try {
                 ans = Integer.parseInt(input);
                 if(ans < min || ans > max) {
-                    System.out.println("That is out of range!");
+                    System.out.println(badInputText);
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println("That is out of range!");
+                System.out.println(badInputText);
             }
         }
         return ans;
@@ -40,10 +69,10 @@ public class GetInput {
             try {
                 ans = Integer.parseInt(input);
                 if(ans <= 0) {
-                    System.out.println("Wrong input, please pick a positive number");
+                    System.out.println(badInputText);
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println("Wrong input, please pick a positive number");
+                System.out.println(badInputText);
             }
         }
         return ans;
@@ -62,10 +91,10 @@ public class GetInput {
             try {
                 ans = Integer.parseInt(input);
                 if(ans < 0 || ans % 2 == 0) {
-                    System.out.println("Wrong input, please pick a positive odd number");
+                    System.out.println(badInputText);
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println("Wrong input, please pick a positive odd number");
+                System.out.println(badInputText);
             }
         }
         return ans;
@@ -84,7 +113,8 @@ public class GetInput {
     public String pickBetween(String optionA, String inputA, String optionB, String inputB) {
         String ans = "";
         while(!ans.equals(inputA) && !ans.equals(inputB)) {
-            System.out.println("Please enter '" + inputA + "' for " + optionA + " or '" + inputB + "' for " + optionB + ".");
+            // System.out.println("Please enter '" + inputA + "' for " + optionA + " or '" + inputB + "' for " + optionB + ".");
+            System.out.printf(pickBetweenText, inputA, optionA, inputB, optionB);
             ans = sc.next();
             if(!ans.equals(inputA) && !ans.equals(inputB)) {
                 System.out.println("That's not one of the choices!");
