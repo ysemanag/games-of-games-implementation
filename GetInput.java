@@ -14,6 +14,8 @@ public class GetInput {
     private String roundPickText = "Enter number of guesses: ";
     private String badInputText = "That is out of range!";
 
+    public GetInput() {};
+
     /**
      * Change the text displayed when asking for an input range.
      *
