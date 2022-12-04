@@ -28,6 +28,28 @@ public class GetInput {
     }
 
     /**
+     * Ask the user to pick a positive integer.
+     *
+     * @return The user's inputed number
+     */
+    public int getPositiveInt() {
+        int ans = -1;
+        while(ans <= 0) {
+            System.out.println("Please enter a range from 0 through: ");
+            String input = sc.next();
+            try {
+                ans = Integer.parseInt(input);
+                if(ans <= 0) {
+                    System.out.println("Wrong input, please pick a positive number");
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println("Wrong input, please pick a positive number");
+            }
+        }
+        return ans;
+    }
+
+    /**
      * Ask the user to pick a "best of" integer, which will be positive and odd.
      *
      * @return The user's inputed number
