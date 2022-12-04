@@ -8,11 +8,11 @@ import java.util.*;
  * @author: Yves Semana Gisubizo
  * @version: 1.0.0
  */
-public class OverallGame {
+public class PlayGames {
     static String player1, player2;
     static int player1TotalScore = 0, player2TotalScore = 0;
 
-    public OverallGame() {
+    public PlayGames() {
     }
 
     /**
@@ -22,8 +22,9 @@ public class OverallGame {
     public static void main(String args[]) {
         GetInput Input = new GetInput();
         // getting player names
-        player1 = Input.getPlayerNames()[0];
-        player2 = Input.getPlayerNames()[1];
+        String players[] = Input.getPlayerNames();
+        player1 = players[0];
+        player2 = players[1];
 
         // display the scoreboard
         displayScoreBoard();
