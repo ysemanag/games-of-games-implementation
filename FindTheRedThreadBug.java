@@ -1,11 +1,6 @@
 import java.util.*;
 
-/**
-*
-*
- */
-public class FindTheRedThread {
-
+public class FindTheRedThreadBug {
     static int player1Points = 0, player2Points = 0, numOfThreadsToPull = 0;
     static int redThread = 12; // fixed number between 1-20 for now, might change a way of determining this red
     static boolean winStatus = false; // returns true if player wins and false if computer/player2 wins
@@ -13,9 +8,7 @@ public class FindTheRedThread {
     // thread
 
     // constructor
-    public FindTheRedThread() {
-        // this.player1Points = player1Points;
-        // this.player2Points = player1Points;
+    public FindTheRedThreadBug() {
     }
 
     /**
@@ -37,10 +30,9 @@ public class FindTheRedThread {
         numOfThreadsToPull = giveNumberOfThreads();
 
         // randomizing the numbers between 1-20, if these numbers include the
-        // redThread=12, player 1
         int maxPossiblePulls = 10; // maximum possible pulls for each player
 
-        while (maxPossiblePulls > 0) {
+        while (maxPossiblePulls >= 0) { // BUG 1: ALLOWING USERS TO PULL THREADS WHEN THERE ARE NO MORE THREADS LEFT
             // they did not specify what happens if this number is reached without computer
             // randomizing the red thread
             if (maxPossiblePulls == 0) {
@@ -89,7 +81,8 @@ public class FindTheRedThread {
         System.out.println("1. User 1\n2. User 2");
 
         do {
-            System.out.println("Please enter 1 for player 1 or 2 for player 2. Enter your choice: ");
+            // BUG 2: MISMATCHING THE USER CHOICES
+            System.out.println("Please enter 2 for player 1 or 1 for player 2. Enter your choice: ");
             userChoice = sc.nextInt();
             if (userChoice == 1 || userChoice == 2) {
                 return userChoice;
@@ -106,7 +99,7 @@ public class FindTheRedThread {
     static int giveNumberOfThreads() {
         Scanner sc = new Scanner(System.in);
         System.out.println(
-                "Please enter number of threads to pull from the box (array with random values(19 blue threads and 1 Red)):");
+                "Please enter number of threads to pull from the box (The red thread is number 12)):");
         int numOfThreadsToPull = sc.nextInt();
 
         // they did not say what happens if number of threads is greater than 20
@@ -120,14 +113,18 @@ public class FindTheRedThread {
     */
     static boolean checkForThread(int numThreads, int player) {
         // boolean found = false;
+        Scanner sc = new Scanner(System.in);
         int index = 0;
-        int min = 1, max = 20;
+        // int min = 1, max = 20;
         while (index < numThreads) {
-            int pulledThread = (int) Math.floor(Math.random() * (max - min + 1) + min); // randomizing a number btn 1-20
+            // int pulledThread = (int) Math.floor(Math.random() * (max - min + 1) + min);
+            // // randomizing a number btn 1-20
+            System.out.println("Pick a thread by entering a number btn 1-20 (Red Thread is 12): ");
+            int pulledThread = sc.nextInt();
             System.out.print("Player " + player + " pulled thread " + pulledThread + "\n");
             if (pulledThread == redThread) {
                 System.out.println("Red thread found. Player " + player + " won!");
-                found = true;
+                // found = true; //BUG 3: FORGETTING TO UPDATE FOUND STATUS
                 // add point to player 1
                 if (player == 1) {
                     player1Points++; // wasn't defined in their use cases
@@ -151,5 +148,4 @@ public class FindTheRedThread {
         FindTheRedThread redthread = new FindTheRedThread();
         redthread.runGame();
     }
-
 }

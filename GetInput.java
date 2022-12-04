@@ -1,5 +1,10 @@
 import java.util.*;
 
+/**
+ * GetInput class used to get all the inputs from the user/s.
+ * Auth: Ed Shi
+ * Version: 1.0.0
+ */
 public class GetInput {
 
     public GetInput() {

@@ -1,12 +1,13 @@
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner6;
+//import javax.lang.model.util.ElementScanner6;
 
 /**
-*
-*
+ * Master class of all the games in Game of games.
+ * 
+ * @author: Yves Semana Gisubizo
+ * @version: 1.0.0
  */
-// public class OverallGame extends GetInput {
 public class OverallGame {
     static String player1, player2;
     static int player1TotalScore = 0, player2TotalScore = 0;
@@ -37,10 +38,7 @@ public class OverallGame {
         startGame(choice);
 
         // ask if continue "c" or quit "q" from Input
-        if ("c".equals(Input.pickBetween("continue", "c", "quit", "q"))) {
-            // ask user game choice
-            startGame(choice);
-        }
+        playOrEndGame();
 
         // updating the score
 
@@ -59,12 +57,17 @@ public class OverallGame {
         switch (choice) {
             case 1:
                 // FindTheRedThread
-                FindTheRedThread thread = new FindTheRedThread(0, 0);
+                FindTheRedThread thread = new FindTheRedThread();
 
-                int threadTemp1 = thread.player1Points;
-                int threadTemp2 = thread.player2Points;
-                player1TotalScore += threadTemp1;
-                player2TotalScore += threadTemp2;
+                boolean threadStatus = thread.runGame();
+                boolean found = thread.found; // only adding points for players if thread was found
+                if (threadStatus && found) {
+                    player1TotalScore++;
+                } else if (!threadStatus && found) {
+                    player2TotalScore++;
+                }
+                displayScoreBoard();
+                playOrEndGame();
                 break;
             case 2:
                 // CoinFlip
@@ -75,10 +78,8 @@ public class OverallGame {
                 } else {
                     player2TotalScore++;
                 }
-                // int coinTemp1 = coin.player1Points;
-                // int coinTemp2 = coin.player2Points;
-                // player1TotalScore += coinTemp1;
-                // player2TotalScore += coinTemp2;
+                displayScoreBoard();
+                playOrEndGame();
                 break;
             case 3:
                 // GuessTheNumber
@@ -89,11 +90,8 @@ public class OverallGame {
                 } else {
                     player2TotalScore++;
                 }
-
-                // int guessTemp1 = guess.player1Points;
-                // int guessTemp2 = guess.player2Points;
-                // player1TotalScore += guessTemp1;
-                // player2TotalScore += guessTemp2;
+                displayScoreBoard();
+                playOrEndGame();
                 break;
             case 4:
                 // EvenOrOdd
@@ -103,11 +101,9 @@ public class OverallGame {
                     player1TotalScore++;
                 } else {
                     player2TotalScore++;
+                    displayScoreBoard();
+                    playOrEndGame();
                 }
-                // int evenTemp1 = even.player1Points;
-                // int evenTemp2 = even.player2Points;
-                // player1TotalScore += evenTemp1;
-                // player2TotalScore += evenTemp2;
                 break;
             case 5:
                 // Thimble
@@ -118,10 +114,8 @@ public class OverallGame {
                 } else {
                     player2TotalScore++;
                 }
-                // int thimbleTemp1 = thimble.player1Points;
-                // int thimbleTemp2 = thimble.player2Points;
-                // player1TotalScore += thimbleTemp1;
-                // player2TotalScore += thimbleTemp1;
+                displayScoreBoard();
+                playOrEndGame();
                 break;
             default:
         }
@@ -131,7 +125,8 @@ public class OverallGame {
      *
      */
     static void displayGames() {
-        System.out.println("1.Find The Red Thread\n2.Coin Flip\n3.Guess The Number\n4.Even or Odd\n5.Thimble");
+        System.out.println(
+                "\nAvailable games\n1.Find The Red Thread\n2.Coin Flip\n3.Guess The Number\n4.Even or Odd\n5.Thimble");
     }
 
     /**
@@ -140,6 +135,19 @@ public class OverallGame {
     */
     static void displayScoreBoard() {
         System.out.println(
-                "Player 1 Total Score = " + player1TotalScore + "\n Player 2 Total Score = " + player2TotalScore);
+                "\nPlayer 1 Total Score = " + player1TotalScore + "\nPlayer 2 Total Score = " + player2TotalScore);
+    }
+
+    /**
+     *
+     */
+    static void playOrEndGame() {
+        GetInput Input = new GetInput();
+        if ("c".equals(Input.pickBetween("continue", "c", "quit", "q"))) {
+            // ask user game choice
+            displayGames();
+            int choice = Input.getIntInRange(1, 5);
+            startGame(choice);
+        }
     }
 }
