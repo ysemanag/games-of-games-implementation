@@ -1,16 +1,23 @@
+//Author: Benny Simoes
+//Version: 1.0
+
 import java.util.*;
 
 public class GuessTheNumber_bug {
 
-       int range;
+       private int range;
+       private boolean p_wins;
+       
 
        GetInput g = new GetInput();
        coin_flip c = new coin_flip();
 
+	// constructor
        public GuessTheNumber_bug() {
        }
 
-       public void run_game() {
+	// runs all the methods in order for the user to play the game.
+       public boolean run_game() {
               int current_guess_num = 1;
               int num_to_guess, guess;
               int num_of_guesses, range;
@@ -20,6 +27,7 @@ public class GuessTheNumber_bug {
               System.out.println();
 
               g.setInputRangeText("Enter number of guesses: ");
+              g.setBadInputText("That is out of range!");   //undefined label
               num_of_guesses = g.getIntInRange(0, range);
               System.out.println();
 
@@ -28,27 +36,30 @@ public class GuessTheNumber_bug {
 
                      num_to_guess = c.random_flip(range + 1);
 
-                     System.out.println("Number to guess is " + num_to_guess + ".\n");
+                     System.out.println("Number to guess is " + num_to_guess + ".\n");   //undefined label
 
-                     g.setInputRangeText("Pick a number between %d and %d: ");
+                     g.setInputRangeText("Pick a number between %d and %d: ");   //undefined label
                      guess = g.getIntInRange(0, range + 1000);
                      System.out.println();
 
                      if (guess == num_to_guess) {
-                            System.out.println("Player's guess is correct\n");
+                            System.out.println("Player's guess is correct\n");   //undefined label
                             correct = true;
                      } else {
-                            System.out.println("Player's guess is incorrect\n");
+                            System.out.println("Player's guess is incorrect\n");   //undefined label
                      }
 
                      current_guess_num++;
               }
 
               if (correct) {
-                     System.out.println("Computer wins the game\n");
+                     System.out.println("Computer wins the game\n");   //undefined label
+                     p_wins = true;
               } else {
-                     System.out.println("Player wins the game\n");
+                     System.out.println("Player wins the game\n");   //undefined label
+                     p_wins = false;
               }
+              return p_wins;
        }
 
        public static void main(String args[]) {
