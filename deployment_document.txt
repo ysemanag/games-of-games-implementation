@@ -1,0 +1,11 @@
+================================================================================
+                                   HOW TO USE
+================================================================================
+
+1. Go to the GitHub page: https://github.com/ysemanag/games-of-games-implementation
+2. Click on the green "Code" button with the <> symbol.
+3. Download the code as a ZIP file.
+4. Unzip the file.
+5a. Run the main method on PlayGames.java, or
+5b. Run the main method on PlayGamesTest.java for Test Mode, or
+5c. Run the main method on PlaygamesBug.java for Bug Mode.
