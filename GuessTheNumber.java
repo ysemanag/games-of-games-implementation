@@ -29,11 +29,11 @@ public class GuessTheNumber {
 		g.setBadInputText("That is out of range!");         //undefined label
 		num_of_guesses = g.getIntInRange(0, range / 2);
 		System.out.println();
+		
+		num_to_guess = c.random_flip(range + 1);
 
 		while (current_guess_num <= num_of_guesses && !correct) {
 			System.out.println("Guess " + current_guess_num + "\n");
-
-			num_to_guess = c.random_flip(range + 1);
 
 			g.setInputRangeText("Pick a number between %d and %d: ");   //undefined label
 			guess = g.getIntInRange(0, range);

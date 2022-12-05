@@ -31,10 +31,10 @@ public class GuessTheNumber_test{
          num_of_guesses = g.getIntInRange(0, range/2);
          System.out.println();
  
+ 	 num_to_guess = c.random_flip(range + 1);
+ 	 
          while(current_guess_num <= num_of_guesses && !correct){
  	        System.out.println("Guess " + current_guess_num + "\n");
- 
-                num_to_guess = c.random_flip(range+1);
   
 		System.out.println("Number to guess is " + num_to_guess + ".\n");
 

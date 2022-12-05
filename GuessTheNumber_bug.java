@@ -30,11 +30,11 @@ public class GuessTheNumber_bug {
               g.setBadInputText("That is out of range!");   //undefined label
               num_of_guesses = g.getIntInRange(0, range);
               System.out.println();
+              
+              num_to_guess = c.random_flip(range + 1);
 
               while (current_guess_num <= num_of_guesses && !correct) {
                      System.out.println("Guess " + current_guess_num + "\n");
-
-                     num_to_guess = c.random_flip(range + 1);
 
                      System.out.println("Number to guess is " + num_to_guess + ".\n");   //undefined label
 
