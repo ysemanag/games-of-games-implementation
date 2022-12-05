@@ -1,9 +1,6 @@
-import java.util.*;
-
-//import javax.lang.model.util.ElementScanner6;
 
 /**
- * Master class of all the games in Game of games.
+ * Master class used to play different games Game of games.
  * 
  * @author: Yves Semana Gisubizo
  * @version: 1.0.0
@@ -15,10 +12,6 @@ public class PlayGames {
     public PlayGames() {
     }
 
-    /**
-    *
-    *
-    */
     public static void main(String args[]) {
         GetInput Input = new GetInput();
         // getting player names
@@ -42,18 +35,22 @@ public class PlayGames {
         playOrEndGame();
 
         // updating the score
-
         displayScoreBoard();
 
-        // player with greater points wins the game, but they did not specify a message
-        // to be printed
+        // player with greater points wins Game of games, but they did not specify a
+        // message to be printed. I personally added amde this up
+        if (player1TotalScore > player2TotalScore) {
+            System.out.println("Player 1 won Game of games. Congratulations " + player1 + "!");
+        } else {
+            System.out.println("Player 2/Computer won Game of games. Congratulations " + player1 + "!");
+        }
 
     }
 
     /**
-    *
-    *
-    */
+     * startGame mtheod that starts whichever game is chosed by the players
+     *
+     */
     static void startGame(int choice) {
         switch (choice) {
             case 1:
@@ -123,7 +120,7 @@ public class PlayGames {
     }
 
     /**
-     *
+     * displayGames method displays all the 5 games whenever required
      */
     static void displayGames() {
         System.out.println(
@@ -131,24 +128,31 @@ public class PlayGames {
     }
 
     /**
-    *
-    *
-    */
+     * displayScoreBoard method displays the updated scored board for the players
+     * whenever required
+     *
+     */
     static void displayScoreBoard() {
         System.out.println(
-                "\nPlayer 1 Total Score = " + player1TotalScore + "\nPlayer 2 Total Score = " + player2TotalScore);
+                "\nPlayer 1 Total Score = " + player1TotalScore + "\nPlayer 2/Computer Total Score = "
+                        + player2TotalScore + "\n");
     }
 
     /**
-     *
+     * playOrEndGame method allows players to continue playring or quit the Game of
+     * Games. Displays the overall final score board
      */
     static void playOrEndGame() {
         GetInput Input = new GetInput();
-        if ("c".equals(Input.pickBetween("continue", "c", "quit", "q"))) {
+        String choice = Input.pickBetween("continue", "c", "quit", "q");
+        if (choice.equals("c")) {
             // ask user game choice
             displayGames();
-            int choice = Input.getIntInRange(1, 5);
-            startGame(choice);
+            int gameChoice = Input.getIntInRange(1, 5);
+            startGame(gameChoice);
+        } else if (choice.equals("q")) {
+            displayScoreBoard();
+            System.exit(1);
         }
     }
 }
